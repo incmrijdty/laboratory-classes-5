@@ -8,7 +8,7 @@
   <body>
     <main>
       <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
-      activeLinkPath }); %>
+      activeLinkPath, cartCount }); %>
       <h1 class="heading"><%= product.name %></h1>
       <div><%= product.description %></div>
       <button onclick="deleteProduct('<%= product.name %>')">Delete</button>

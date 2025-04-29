@@ -1,9 +1,12 @@
 const Product = require("../models/Product");
 const { MENU_LINKS } = require("../constants/navigation");
 const { STATUS_CODE } = require("../constants/statusCode");
+const Cart = require("../models/cart");
 
 exports.getProductsView = (request, response) => {
   const products = Product.getAll();
+
+  const cartCount = Cart.getProductsQuantity(); 
 
   response.render("products.ejs", {
     headTitle: "Shop - Products",
@@ -11,26 +14,25 @@ exports.getProductsView = (request, response) => {
     menuLinks: MENU_LINKS,
     activeLinkPath: "/products",
     products,
+    cartCount: cartCount,
   });
 };
 
 exports.getAddProductView = (request, response) => {
+  const cartCount = Cart.getProductsQuantity(); 
+
   response.render("add-product.ejs", {
     headTitle: "Shop - Add product",
     path: "/add",
     menuLinks: MENU_LINKS,
     activeLinkPath: "/products/add",
+    cartCount: cartCount,
   });
-};
-
-exports.addNewProduct = (request, response) => {
-  Product.add(request.body);
-
-  response.status(STATUS_CODE.FOUND).redirect("/products/new");
 };
 
 exports.getNewProductView = (request, response) => {
   const newestProduct = Product.getLast();
+  const cartCount = Cart.getProductsQuantity(); 
 
   response.render("new-product.ejs", {
     headTitle: "Shop - New product",
@@ -38,12 +40,15 @@ exports.getNewProductView = (request, response) => {
     activeLinkPath: "/products/new",
     menuLinks: MENU_LINKS,
     newestProduct,
+    cartCount: cartCount,
   });
 };
 
 exports.getProductView = (request, response) => {
   const name = request.params.name;
   const product = Product.findByName(name);
+  const cartCount = Cart.getProductsQuantity(); 
+
 
   response.render("product.ejs", {
     headTitle: "Shop - Product",
@@ -51,6 +56,7 @@ exports.getProductView = (request, response) => {
     activeLinkPath: `/products/${name}`,
     menuLinks: MENU_LINKS,
     product,
+    cartCount: cartCount,
   });
 };
 

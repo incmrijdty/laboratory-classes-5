@@ -6,16 +6,12 @@
   <body>
     <main>
       <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
-      activeLinkPath }); %>
+      activeLinkPath, cartCount }); %>
       <h1 class="heading">Products</h1>
       <% if (products?.length > 0) { %>
       <ul>
         <% products.forEach(product => { %>
-        <li>
-          Name: <%= product.name %>, Description: <%= product.description %>
-          <a href="/products/<%= product.name %>">Details</a>
-          <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
-        </li>
+          <%- include('partials/card', { product }) %>
         <% }); %>
       </ul>
       <% } else { %>

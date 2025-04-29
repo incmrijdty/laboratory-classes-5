@@ -1,0 +1,17 @@
+<div class="card">
+    <img 
+      class="card__image" 
+      src="https://envybox.io/blog/wp-content/uploads/2023/07/IMG_3505.jpg" 
+      alt="<%= product.name %>"
+    >
+  
+    <h3 class="card__title"><%= product.name %></h3>
+  
+    <p class="card__description"><%= product.description %></p>
+  
+    <p class="card__price"><%= product.price.toFixed(2) %> zł</p>
+  
+    <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
+  
+    <a href="/products/<%= product.name %>">Details</a>
+  </div>

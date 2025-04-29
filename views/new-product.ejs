@@ -6,13 +6,13 @@
   <body>
     <main>
       <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
-      activeLinkPath }); %>
+      activeLinkPath, cartCount }); %>
       <h1 class="heading">Newest product</h1>
       <% if (newestProduct?.name) { %>
       <br />
       <div>
         New product data - Name: <%= newestProduct.name %>, Description: <%=
-        newestProduct.description %>
+        newestProduct.description %>, Price: <%= newestProduct.price %>
       </div>
       <% } else { %>
       <br />
